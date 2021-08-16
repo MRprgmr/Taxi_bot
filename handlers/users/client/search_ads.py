@@ -1,22 +1,23 @@
-from states.common_states import SavedAdsState
-from handlers.users.most_uses import send_main_menu
-from aiogram.types.callback_query import CallbackQuery
-from keyboards.default import ads_filters
-from keyboards.inline.callbackdatas import AddAdsToSaved, AdsView_callback, Province_callback, Region_callback, calendar_callback
-from keyboards.inline.select_locations import select_province, select_region
-from keyboards.default.ads_filters import ads_filters_buttons
-from states.ads_view_filetrs_state import Ads_Filters
-from asgiref.sync import sync_to_async
-from Bot.models import Ads, Province, Region, User
 from aiogram.dispatcher import FSMContext
-from keyboards.inline.calendar import SimpleCalendar
 from aiogram.dispatcher.filters import Text
 from aiogram.types import Message
+from aiogram.types.callback_query import CallbackQuery
+from asgiref.sync import sync_to_async
 
-from keyboards.inline.ads_view import get_ads
-from keyboards.inline.saved_ads_view import get_ads as get_ads2
+from Bot.models import Ads, Province, Region, User
 from filters.is_registered import IsRegistered
+from handlers.users.most_uses import send_main_menu
+from keyboards.default import ads_filters
+from keyboards.default.ads_filters import ads_filters_buttons
+from keyboards.inline.ads_view import get_ads
+from keyboards.inline.calendar import SimpleCalendar
+from keyboards.inline.callbackdatas import AddAdsToSaved, AdsView_callback, Province_callback, Region_callback, \
+    calendar_callback
+from keyboards.inline.saved_ads_view import get_ads as get_ads2
+from keyboards.inline.select_locations import select_province, select_region
 from loader import dp
+from states.ads_view_filetrs_state import Ads_Filters
+from states.common_states import SavedAdsState
 
 
 def get_available_ads_count(queryset):
@@ -111,7 +112,8 @@ async def select_destination_region(call: CallbackQuery, state: FSMContext, call
             reply_markup=await SimpleCalendar().start_calendar())
         await Ads_Filters.scheduled_date.set()
     else:
-        await call.answer("Kechirasiz ushbu manzil bo'yicha hozircha e'lon yo'q, boshqa manzillardan urinib ko'ring", show_alert=True)
+        await call.answer("Kechirasiz ushbu manzil bo'yicha hozircha e'lon yo'q, boshqa manzillardan urinib ko'ring",
+                          show_alert=True)
 
 
 @dp.callback_query_handler(calendar_callback.filter(), state=Ads_Filters.scheduled_date)
@@ -134,7 +136,8 @@ async def get_date(call: CallbackQuery, state: FSMContext, callback_data: dict):
             available_ads = await sync_to_async(available_ads.order_by)('scheduled_date')
             available_ads = await sync_to_async(get_available_ads_count)(available_ads)
             if len(available_ads) == 0:
-                await call.answer("Kechirasiz siz bergan manzillar bo'yicha hech qanday e'lon topilmadi.", show_alert=True)
+                await call.answer("Kechirasiz siz bergan manzillar bo'yicha hech qanday e'lon topilmadi.",
+                                  show_alert=True)
             text = "Kechirasi ushbu sana uchun hech qanday e'lon topilmadi, lekin quyidagi sanalarda e'lonlar mavjud:\n\n"
             for k, val in available_ads.items():
                 text += f"{k.strftime('%A, %e-%B')}  —  {val} ta\n"

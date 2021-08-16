@@ -1,5 +1,5 @@
-from aiogram.utils import markdown
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from aiogram.utils import markdown
 
 from keyboards.inline.callbackdatas import AdsView_callback, DeleteSavedAds
 
@@ -26,17 +26,17 @@ def get_ads(id, queryset):
     if id == 0:
         previous_button = "null"
     else:
-        previous_button = AdsView_callback.new(action='show', ads_id=id-1)
-    if id == queryset.count()-1:
+        previous_button = AdsView_callback.new(action='show', ads_id=id - 1)
+    if id == queryset.count() - 1:
         next_button = "null"
     else:
-        next_button = AdsView_callback.new(action='show', ads_id=id+1)
+        next_button = AdsView_callback.new(action='show', ads_id=id + 1)
 
     AdsModel.add(
         InlineKeyboardButton(text="<",
                              callback_data=previous_button,
                              ),
-        InlineKeyboardButton(text=f"{id+1}/{queryset.count()}",
+        InlineKeyboardButton(text=f"{id + 1}/{queryset.count()}",
                              callback_data="null",
                              ),
         InlineKeyboardButton(text=">",
@@ -45,7 +45,7 @@ def get_ads(id, queryset):
     )
 
     AdsModel.add(InlineKeyboardButton(text="🗑 O'chirish",
-                 callback_data=DeleteSavedAds.new(ads_id=id)))
+                                      callback_data=DeleteSavedAds.new(ads_id=id)))
 
     result = {'text': text, 'markup': AdsModel}
     return result

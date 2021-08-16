@@ -19,7 +19,7 @@ async def show_my_ads(message: Message, state: FSMContext):
             mail = "Bor"
         else:
             mail = "Yo'q"
-        
+
         answer = "\n".join([
             "<b>ℹ️ E'lon ma'lumotlari:</b>\n",
             f"<b>📌 Qayerdan:</b>  {ads.From.Province.Name}, {ads.From.Name}\n",

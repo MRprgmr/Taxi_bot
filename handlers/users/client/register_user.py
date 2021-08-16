@@ -5,8 +5,8 @@ from aiogram.types import CallbackQuery, ReplyKeyboardMarkup, KeyboardButton, Me
     ReplyKeyboardRemove
 from asgiref.sync import sync_to_async
 
-from keyboards.default.main_menu import main_menu_driver, main_menu_user
 from Bot.models import User
+from keyboards.default.main_menu import main_menu_user
 from keyboards.default.send_contact import request_contract
 from keyboards.inline.register_button import AcceptButton
 from keyboards.inline.type_users import TypesMarkup

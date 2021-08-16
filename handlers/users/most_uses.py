@@ -3,10 +3,6 @@ from asgiref.sync import sync_to_async
 from Bot.models import User
 from keyboards.default.main_menu import main_menu_driver, main_menu_user
 from loader import dp
-from aiogram.utils.markdown import hbold
-from keyboards.inline.register_button import RegisterButton
-
-from states.register_state import RegisterUser
 
 
 async def send_main_menu(id):

@@ -1,14 +1,16 @@
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from aiogram import types, Dispatcher, Bot
-from loader import dp
 import asyncio
 
+from aiogram import types, Dispatcher, Bot
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
+from loader import dp
 
 loop = asyncio.get_event_loop()
 
+
 class UpdateBot(APIView):
-    def post(self,request):
+    def post(self, request):
         try:
             update = types.Update(**request.data)
             Dispatcher.set_current(dp)

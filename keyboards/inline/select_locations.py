@@ -18,7 +18,7 @@ def select_province(provinces, direction):
 
 def select_region(regions, direction):
     regions_keyboard = InlineKeyboardMarkup(row_width=2)
-    for i in range(0, len(regions)-1, 2):
+    for i in range(0, len(regions) - 1, 2):
         regions_keyboard.add(
             InlineKeyboardButton(
                 text=regions[i].Name,
@@ -26,9 +26,9 @@ def select_region(regions, direction):
                     direction=direction, name=regions[i].Name, id=regions[i].id),
             ),
             InlineKeyboardButton(
-                text=regions[i+1].Name,
+                text=regions[i + 1].Name,
                 callback_data=Region_callback.new(
-                    direction=direction, name=regions[i+1].Name, id=regions[i+1].id),
+                    direction=direction, name=regions[i + 1].Name, id=regions[i + 1].id),
             )
         )
     if len(regions) % 2:

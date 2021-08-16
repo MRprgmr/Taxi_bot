@@ -1,9 +1,8 @@
 import calendar
 from datetime import datetime, timedelta
-import locale
+
 from aiogram.types import CallbackQuery
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-from aiogram.utils.callback_data import CallbackData
 
 from keyboards.inline.callbackdatas import calendar_callback
 

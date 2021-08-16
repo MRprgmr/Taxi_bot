@@ -1,7 +1,7 @@
-from aiogram.utils import markdown
-from Bot.models import Ads, User
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from aiogram.utils import markdown
 
+from Bot.models import User
 from keyboards.inline.callbackdatas import AddAdsToSaved, AdsView_callback
 
 
@@ -28,17 +28,17 @@ def get_ads(tg_id, id, queryset):
     if id == 0:
         previous_button = "null"
     else:
-        previous_button = AdsView_callback.new(action='show', ads_id=id-1)
-    if id == queryset.count()-1:
+        previous_button = AdsView_callback.new(action='show', ads_id=id - 1)
+    if id == queryset.count() - 1:
         next_button = "null"
     else:
-        next_button = AdsView_callback.new(action='show', ads_id=id+1)
+        next_button = AdsView_callback.new(action='show', ads_id=id + 1)
 
     AdsModel.add(
         InlineKeyboardButton(text="<",
                              callback_data=previous_button,
                              ),
-        InlineKeyboardButton(text=f"{id+1}/{queryset.count()}",
+        InlineKeyboardButton(text=f"{id + 1}/{queryset.count()}",
                              callback_data="null",
                              ),
         InlineKeyboardButton(text=">",

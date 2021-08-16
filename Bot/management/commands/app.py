@@ -1,7 +1,6 @@
 from aiogram import executor
 from django.core.management.base import BaseCommand
 
-import handlers
 import filters
 import middlewares
 from loader import dp

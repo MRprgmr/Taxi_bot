@@ -1,14 +1,13 @@
 from aiogram.dispatcher import FSMContext
+from aiogram.dispatcher.filters import Command
 from aiogram.types import Message, CallbackQuery
 from asgiref.sync import sync_to_async
 
-from Bot.models import User, Car
+from Bot.models import User
 from filters.is_registered import IsRegistered
 from keyboards.inline.defaults import EditProfile
 from keyboards.inline.type_users import TypesMarkup
 from loader import dp
-from aiogram.dispatcher.filters import Command
-
 from states.register_state import RegisterUser
 
 

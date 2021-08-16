@@ -1,7 +1,8 @@
 from aiogram.dispatcher import FSMContext
+from aiogram.dispatcher.filters import Text
 from aiogram.types import Message, ContentTypes, ReplyKeyboardRemove, CallbackQuery
 from asgiref.sync import sync_to_async
-from aiogram.dispatcher.filters import Text
+
 from Bot.models import Province, User, Ads, Region
 from filters.driver_filters import StartCreateAds
 from handlers.users.most_uses import send_main_menu
@@ -134,7 +135,8 @@ async def confirm_ads(call: CallbackQuery, state: FSMContext):
     driver = await sync_to_async(User.objects.get)(Telegram_id=call.message.chat.id)
     From = await sync_to_async(Region.objects.get)(id=data['from_region']['id'])
     To = await sync_to_async(Region.objects.get)(id=data['to_region']['id'])
-    await sync_to_async(Ads.objects.create)(Driver=driver, From=From, To=To, scheduled_date=data['scheduled_date'], has_mail=data['mail'])
+    await sync_to_async(Ads.objects.create)(Driver=driver, From=From, To=To, scheduled_date=data['scheduled_date'],
+                                            has_mail=data['mail'])
     await call.message.delete()
     await send_main_menu(call.message.chat.id)
 

@@ -1,7 +1,5 @@
 from django.contrib import admin
-from django.contrib.admin.options import ModelAdmin
 
-from states.register_state import RegisterUser
 from .models import User, Car, Province, Region, Ads
 
 admin.site.register(Car)

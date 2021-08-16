@@ -1,17 +1,19 @@
-from aiogram.dispatcher.storage import FSMContext
+import asyncio
+from datetime import datetime
+
 from aiogram.dispatcher.filters.builtin import Command
-from asgiref.sync import sync_to_async
+from aiogram.dispatcher.filters.state import StatesGroup, State
+from aiogram.dispatcher.storage import FSMContext
+from aiogram.types import ContentTypes as ct
+from aiogram.types import KeyboardButton, ReplyKeyboardMarkup
 from aiogram.types.message import Message
 from aiogram.types.reply_keyboard import ReplyKeyboardRemove
-from filters.is_admin import IsAdmin
+from asgiref.sync import sync_to_async
+
 from Bot.models import User, Ads
-from aiogram.types import ContentTypes as ct
+from filters.is_admin import IsAdmin
 from loader import dp
-from aiogram.dispatcher.filters.state import StatesGroup, State
-from aiogram.types import KeyboardButton, ReplyKeyboardMarkup
-import asyncio
 from .most_uses import send_main_menu
-from datetime import datetime
 
 
 # show admin commands --------------------------------------------
@@ -23,6 +25,8 @@ async def show_admin_commands(message: Message):
         "/broadcast — send broadcast to bot users.",
     ])
     await message.answer(answer)
+
+
 # -----------------------------------------------------------------
 
 
@@ -59,10 +63,13 @@ def get_status_info():
     ])
     return result
 
+
 @dp.message_handler(IsAdmin(), Command('status'))
 async def show_bot_status(message: Message):
     statistics = await sync_to_async(get_status_info)()
     await message.answer(statistics)
+
+
 # -------------------------------------------------------------------
 
 
@@ -101,7 +108,8 @@ async def cancel(message: Message, state: FSMContext):
     await send_main_menu(message.from_user.id)
 
 
-@dp.message_handler(IsAdmin(), content_types=ct.TEXT | ct.AUDIO | ct.PHOTO | ct.VIDEO | ct.VIDEO_NOTE, state=BroadCastState.start)
+@dp.message_handler(IsAdmin(), content_types=ct.TEXT | ct.AUDIO | ct.PHOTO | ct.VIDEO | ct.VIDEO_NOTE,
+                    state=BroadCastState.start)
 async def send_broadcast_start(message: Message, state: FSMContext):
     await message.answer("Broadcast started...")
     users_ids = await sync_to_async(get_users)()

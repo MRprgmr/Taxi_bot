@@ -1,15 +1,16 @@
-from handlers.users.most_uses import send_main_menu
-from aiogram.types.callback_query import CallbackQuery
-from keyboards.inline.callbackdatas import AdsView_callback, DeleteSavedAds
-from keyboards.inline.saved_ads_view import get_ads
-from keyboards.default import ads_filters
 from aiogram.dispatcher.storage import FSMContext
-from states.common_states import SavedAdsState
-from Bot.models import User
+from aiogram.types.callback_query import CallbackQuery
 from aiogram.types.message import Message
 from asgiref.sync import sync_to_async
+
+from Bot.models import User
 from filters.is_registered import IsRegistered
+from handlers.users.most_uses import send_main_menu
+from keyboards.default import ads_filters
+from keyboards.inline.callbackdatas import AdsView_callback, DeleteSavedAds
+from keyboards.inline.saved_ads_view import get_ads
 from loader import dp
+from states.common_states import SavedAdsState
 
 
 def delete_saved(user, ads_id, query):

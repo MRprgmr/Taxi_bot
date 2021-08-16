@@ -1,8 +1,9 @@
 from aiogram.types.message import Message
-from filters.is_registered import IsRegistered
-from re import I
-from loader import dp
 from aiogram.utils import markdown
+
+from filters.is_registered import IsRegistered
+from loader import dp
+
 
 @dp.message_handler(IsRegistered(), text="👨‍💻 Bot Haqida")
 async def about_message(message: Message):

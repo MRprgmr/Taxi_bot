@@ -1,14 +1,12 @@
 from aiogram import types
 from aiogram.dispatcher.filters.builtin import CommandStart
 from aiogram.utils.markdown import hbold
-
-from handlers.users.most_uses import send_main_menu
-from loader import dp
-from keyboards.inline.register_button import RegisterButton
-from Bot.models import User
-
 from asgiref.sync import sync_to_async
 
+from Bot.models import User
+from handlers.users.most_uses import send_main_menu
+from keyboards.inline.register_button import RegisterButton
+from loader import dp
 from states.register_state import RegisterUser
 
 

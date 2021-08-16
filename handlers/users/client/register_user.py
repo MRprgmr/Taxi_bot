@@ -95,6 +95,10 @@ async def confirm_user_information(call: CallbackQuery, state: FSMContext):
         user.Is_registered = True
         user.Is_Driver = False
         user.Age = None
+        user_ads = await sync_to_async(user.Saved_ads.all)()
+        for ads in user_ads:
+            ads.status = False
+            await sync_to_async(ads.save)()
         await sync_to_async(user.save)()
         await call.message.delete()
         await call.message.answer(text='\n'.join([

@@ -1,11 +1,9 @@
-from .admin import dp
-from .start import dp
-from .help import dp
-from .profile import dp
-from .feedback import dp
-from .driver import dp
-from .client import dp
-from .about import dp
-from .echo import dp
-
-__all__ = ["dp"]
+from . import admin
+from . import start
+from . import help
+from . import profile
+from . import feedback
+from . import driver
+from . import client
+from . import about
+from . import echo

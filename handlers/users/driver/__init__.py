@@ -1,5 +1,3 @@
-from .add_new_ads import dp
-from .my_ads import dp
-from .register_driver import dp
-
-__all__ = ['dp']
+from . import add_new_ads
+from . import my_ads
+from . import register_driver

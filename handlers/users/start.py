@@ -12,7 +12,6 @@ from states.register_state import RegisterUser
 
 @dp.message_handler(CommandStart(), state='*')
 async def bot_start(message: types.Message):
-    print("ok")
     await dp.current_state().finish()
     user, created = await sync_to_async(User.objects.update_or_create)(Telegram_id=message.from_user.id,
                                                                        defaults={

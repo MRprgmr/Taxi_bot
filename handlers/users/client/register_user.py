@@ -51,8 +51,8 @@ async def get_name(message: Message, state: FSMContext):
         await state.update_data(name=message.text)
         answer_text = "\n".join([
             "   ✅  ☑️\n",
-            "2. Telefon raqamingizni <b>+998XXXXXXXXX</b> formatida jo'nating\nyoki <b>📲 Raqamni jo'natish</b> "
-            "tugmasini bosing:",
+            "2. Telefon raqamingizni kiritish uchun:\n\n<b>📞 Yuborish</b> tugmasini bosing yoki boshqa raqamni quyidagi ",
+            "ko'rinishda yozing!\n\n👉 +998901234567",
         ])
         await message.answer(text=answer_text, reply_markup=request_contract)
         await RegisterUser.phone_number.set()
@@ -70,7 +70,7 @@ async def get_number(message: Message, state: FSMContext):
     if phone_number[0] != '+':
         phone_number = '+' + phone_number
 
-    if re.match(r"\+998(?:33|93|94|97|90|91|98|99|95|88)\d\d\d\d\d\d\d", phone_number) is not None:
+    if re.match(r"\+998(?:33|93|94|97|90|91|98|99|95|88)\d\d\d\d\d\d\d", phone_number) is not None and len(phone_number) == 13:
         await state.update_data(phone_number=phone_number)
         data = await state.get_data()
         answer_text = "\n".join([

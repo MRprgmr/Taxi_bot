@@ -37,9 +37,9 @@ async def get_name(message: Message, state: FSMContext):
     if len(message.text) >= 3 and message.text.isalpha():
         await state.update_data(name=message.text)
         answer_text = "\n".join([
-            "   ✅  ☑️  ⬜️  ⬜️\n",
-            "2. Telefon raqamingizni <b>+998XXXXXXXXX</b> formatida jo'nating\nyoki <b>📲 Raqamni jo'natish</b> "
-            "tugmasini bosing:",
+            "   ✅  ☑️  ⬜️  ⬜\n",
+            "2. Telefon raqamingizni kiritish uchun:\n\n<b>📞 Yuborish</b> tugmasini bosing yoki boshqa raqamni quyidagi ",
+            "ko'rinishda yozing!\n\n👉 +998901234567",
         ])
         await message.answer(text=answer_text, reply_markup=request_contract)
         await RegisterDriver.phone_number.set()
@@ -57,7 +57,7 @@ async def get_number(message: Message, state: FSMContext):
     if phone_number[0] != '+':
         phone_number = '+' + phone_number
 
-    if re.match(r"\+998(?:33|93|94|97|90|91|98|99|95|88)\d\d\d\d\d\d\d", phone_number) is not None:
+    if re.match(r"\+998(?:33|93|94|97|90|91|98|99|95|88)\d\d\d\d\d\d\d", phone_number) is not None and len(phone_number) == 13:
         await state.update_data(phone_number=phone_number)
         msg = await message.answer("🔄", reply_markup=ReplyKeyboardRemove())
         await msg.delete()

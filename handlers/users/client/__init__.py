@@ -1,5 +1,3 @@
-from .register_user import dp
-from .search_ads import dp
-from .show_saved_ads import dp
-
-__all__ = ['dp']
+from . import register_user
+from . import search_ads
+from . import show_saved_ads
